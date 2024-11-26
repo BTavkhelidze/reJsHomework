@@ -75,15 +75,15 @@
 
 //! 4) Use these APIs: https://fakestoreapi.com/users  and https://jsonplaceholder.typicode.com/users Fetch data from both endpoints and display the combined data only if both promises are fulfilled successfully.
 
-const users1 = fetch('https://fakestoreapi.com/users');
-const users2 = fetch('https://jsonplaceholder.typicode.com/users ');
+// const users1 = fetch('https://fakestoreapi.com/users');
+// const users2 = fetch('https://jsonplaceholder.typicode.com/users ');
 
-const main1 = async () => {
-  const res = await Promise.all([users1, users2]);
-  const [data1, data2] = await res;
-  const usersOne = await data1.json();
-  const usersTwo = await data2.json();
-  console.log([...usersOne, ...usersTwo]);
-};
+// const main1 = async () => {
+//   const res = await Promise.all([users1, users2]);
+//   const [data1, data2] = await res;
+//   const usersOne = await data1.json();
+//   const usersTwo = await data2.json();
+//   console.log([...usersOne, ...usersTwo]);
+// };
 
-main1();
+// main1();
