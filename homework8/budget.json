@@ -1,0 +1,5 @@
+[
+  { "id": 2, "item": "car", "operation": "sell", "price": "4000" },
+  { "id": 3, "item": "house", "operation": "buy", "price": "9000000" },
+  { "id": 4, "item": "phone", "operation": "buy", "price": "200" }
+]
