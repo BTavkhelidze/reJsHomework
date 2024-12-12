@@ -31,18 +31,30 @@ const server = http.createServer(async (req, res) => {
   const queryName = queryString.parse(pathName.query);
 
   if (pathName.pathname === '/users') {
-    const users = await readFile('users.json', true);
-    res.setHeader('Content-Type', 'application/json');
-    if (queryName.age) {
-      const filteredUsers = users.filter((user) => user.age == queryName.age);
+    try {
+      const users = await readFile('users.json', true);
+      res.setHeader('Content-Type', 'application/json');
+
+      let filteredUsers = users;
+      if (queryName.age) {
+        filteredUsers = users.filter((user) => user.age == queryName.age);
+      }
+      if (queryName.gender) {
+        filteredUsers = users.filter(
+          (user) => user.gender === queryName.gender
+        );
+      }
+      //   if (queryName.gender === 'female') {
+      //     users.filter((user) => user.gender == 'female');
+      //   }
       res.write(JSON.stringify(filteredUsers));
       res.end();
+    } catch (err) {
+      console.log(err.message);
     }
-    res.write(JSON.stringify(users));
-    res.end();
+  } else {
+    res.end('navigate to users path ');
   }
-
-  res.end('navigate to users path ');
 });
 
 server.listen(3500, () => {
