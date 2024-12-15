@@ -120,4 +120,21 @@ program
 
     await writeFile('expenses.json', expenses, true);
   });
+
+program
+  .command('getById')
+  .argument('<id>')
+  .action(async (id) => {
+    const expenses = (await readFile('expenses.json', true)) || [];
+    if (expenses.length === 0) {
+      console.log('no expenses to update');
+      return;
+    }
+
+    const expense = expenses.find((exp) => exp.id === Number(id));
+    if (!expense) {
+      console.log('no expense with this id');
+    }
+    console.log(expense);
+  });
 program.parse();
