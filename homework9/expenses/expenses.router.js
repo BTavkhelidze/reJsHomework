@@ -4,6 +4,7 @@ import {
   deleteExpenses,
   getProduct,
   getUserById,
+  updateExpenseById,
 } from './expenses.service.js';
 
 import {
@@ -16,6 +17,7 @@ const useExpensesRouter = Router();
 useExpensesRouter.get('/', getProduct);
 useExpensesRouter.get('/:id', getUserById);
 useExpensesRouter.post('/', areAllRequiredFieldsfilled, createUser);
-useExpensesRouter.delete('/:id', isKeyMiddleware, deleteExpenses);
+useExpensesRouter.delete('/:id', deleteExpenses);
+useExpensesRouter.put('/:id', updateExpenseById);
 
 export default useExpensesRouter;
