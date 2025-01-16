@@ -1,31 +1,61 @@
-const form = document.querySelector('form');
+const form = document.querySelector<HTMLFormElement>('form');
 
-const id = location.pathname.split('/')[2];
+if (form) {
+  const id = location.pathname.split('/')[2];
 
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
+  form.addEventListener('submit', async (e: Event) => {
+    e.preventDefault();
 
-  const newExpense = {
-    title: form.title.value,
-    category: form.category.value,
-    amount: form.amount.value,
-  };
+    const titleInput = form.querySelector<HTMLInputElement>(
+      'input[name="title"]'
+    );
+    const categoryInput = form.querySelector<HTMLInputElement>(
+      'input[name="category"]'
+    );
+    const amountInput = form.querySelector<HTMLInputElement>(
+      'input[name="amount"]'
+    );
 
-  const res = await fetch(`http://localhost:3000/expenses-list/${id}`, {
-    method: 'PUT',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(newExpense),
+    if (!titleInput || !categoryInput || !amountInput) {
+      console.error('Form inputs not found');
+      return;
+    }
+
+    const newExpense = {
+      title: titleInput.value,
+      category: categoryInput.value,
+      amount: parseFloat(amountInput.value),
+    };
+
+    try {
+      const res = await fetch(`http://localhost:3000/expenses-list/${id}`, {
+        method: 'PUT',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newExpense),
+      });
+
+      if (res.ok) {
+        titleInput.value = '';
+        categoryInput.value = '';
+        amountInput.value = '';
+
+        setTimeout(() => {
+          location.href = `/expenses-list/${id}`;
+        }, 1000);
+      } else {
+        console.error('Failed to update expense:', res.statusText);
+        alert('Failed to update expense. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error while updating expense:', error);
+      alert(
+        'An error occurred while updating the expense. Please try again later.'
+      );
+    }
   });
-
-  if (res.status === 200) {
-    form.category.value = '';
-    form.amount.value = '';
-    form.title.value = '';
-    setTimeout(() => {
-      location.href = `/expenses-list/${id}`;
-    }, 1000);
-  }
-});
+} else {
+  console.error('Form element not found.');
+}

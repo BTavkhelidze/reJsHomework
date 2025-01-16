@@ -6,11 +6,7 @@ import {
   getUserById,
   updateExpenseById,
 } from './expenses.service.js';
-
-import {
-  isKeyMiddleware,
-  areAllRequiredFieldsfilled,
-} from '../middleware/expenses.middleware.js';
+import { areAllRequiredFieldsfilled } from '../middleware/expenses.middleware';
 
 const useExpensesRouter = Router();
 
