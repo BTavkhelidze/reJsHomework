@@ -1,4 +1,5 @@
 import fs from 'fs/promises';
+import type { Express } from 'express';
 
 export async function readFile(filePath, isParsed) {
   const data = await fs.readFile(filePath, 'utf-8');

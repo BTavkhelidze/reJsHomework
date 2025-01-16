@@ -5,7 +5,7 @@ form.addEventListener('submit', async (e) => {
   //   console.log('clicked');
 
   const newExpense = {
-    title: form.title.value,
+    title: : form.title.value,
     category: form.category.value,
     amount: form.amount.value,
   };

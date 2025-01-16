@@ -1,8 +1,8 @@
 import express from 'express';
-import { readFile, writeFile } from './utils/utils.js';
+import { readFile, writeFile } from '../utils/utils.js';
 
-import useExpensesRouter from './expenses/expenses.router.js';
-import randomRouter from './random/random.router.js';
+import useExpensesRouter from './expenses/expenses.router';
+import randomRouter from '../src/random/random.router';
 
 const app = express();
 app.use(express.static('public'));

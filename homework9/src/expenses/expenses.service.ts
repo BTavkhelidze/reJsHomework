@@ -1,6 +1,7 @@
 import { readFile, writeFile } from '../utils/utils.js';
+import { Request, Response } from 'express';
 
-const getProduct = async (req, res) => {
+const getProduct = async (req: Request, res: Response) => {
   const expenses = await readFile('expenses.json', true);
 
   if (req.query.page || req.query.take) {
@@ -15,7 +16,7 @@ const getProduct = async (req, res) => {
   res.render('pages/expenses.ejs', { expenses });
 };
 
-const getUserById = async (req, res) => {
+const getUserById = async (req: Request, res: Response) => {
   const expenses = await readFile('expenses.json', true);
 
   const id = Number(req.params.id);
@@ -26,7 +27,7 @@ const getUserById = async (req, res) => {
   res.render('pages/expenseDetails.ejs', { expense });
 };
 
-const createUser = async (req, res) => {
+const createUser = async (req: Request, res: Response) => {
   const expenses = await readFile('expenses.json', true);
   console.log(req.body);
 
@@ -55,7 +56,7 @@ const createUser = async (req, res) => {
   res.status(200).json({ newExpense });
 };
 
-const deleteExpenses = async (req, res) => {
+const deleteExpenses = async (req: Request, res: Response) => {
   const expenses = await readFile('expenses.json', true);
   const id = Number(req.params.id);
   const expenseIndex = expenses.findIndex((element) => element.id === id);
@@ -67,7 +68,7 @@ const deleteExpenses = async (req, res) => {
     .json({ message: 'delated successfully', data: deletedExpense });
 };
 
-const updateExpenseById = async (req, res) => {
+const updateExpenseById = async (req: Request, res: Response) => {
   const id = Number(req.params.id);
   const { title, amount, category } = req.body;
   const expenses = await readFile('expenses.json', true);

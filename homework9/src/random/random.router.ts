@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { flipCoinRequest } from '../middleware/random.middleware.js';
+import { flipCoinRequest } from '../middleware/random.middleware';
 const useRandom = Router();
 
 export default useRandom.get('/', flipCoinRequest, (req, res) => {
